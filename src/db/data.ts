@@ -1,7 +1,8 @@
 import data_24 from "./2023-24.json";
 import data_25 from "./2024-25.json";
 import data_26 from "./2025-26.json";
-import data_27 from "./2026-27.json";
+
+// import data_27 from "./2026-27.json";
 
 export const dbs: Record<string, any> = {
   "2023-24": data_24,

@@ -24,7 +24,7 @@ export default function Team({
     <p className="text-sm font-bold uppercase tracking-wide">
       Guide
     </p>
-    <Person name={guide} photo={guidePhoto} />
+    <Person name={guide} photo={guidePhoto || ""} />
   </div>
 
   {coguide && (
@@ -32,7 +32,7 @@ export default function Team({
       <p className="text-sm font-bold uppercase tracking-wide">
         Co-guide
       </p>
-      <Person name={coguide} photo={coguidePhoto} />
+      <Person name={coguide} photo={coguidePhoto || ""} />
     </div>
   )}
 </div>

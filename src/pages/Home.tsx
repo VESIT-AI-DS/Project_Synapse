@@ -1,7 +1,5 @@
 import homeLogo from "../assets/images/home_logo.png";
 import { ProjectTable } from "../components";
-import airobo from "../assets/images/ai-robo.png";
-import airoboshadow from "../assets/images/ai-robo-shadow.png";
 
 export default function Home() {
   return (
