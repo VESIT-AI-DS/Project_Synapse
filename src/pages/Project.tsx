@@ -70,9 +70,7 @@ export default function Project() {
     }
 
     // Fallback: search all divisions
-    return Object.values(yearData)
-      .flat()
-      .find((p: any) => p.grpno.toString() === projectId);
+    return (Object.values(yearData) as ProjectData[][]).flat().find((p) => p.grpno.toString() === projectId);
   };
 
   const projectData = getProject();
