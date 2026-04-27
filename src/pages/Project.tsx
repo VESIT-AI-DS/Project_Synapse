@@ -70,9 +70,9 @@ export default function Project() {
     }
 
     // Fallback: search all divisions
-    return (Object.values(yearData) as ProjectData[][])
+    return Object.values(yearData)
       .flat()
-      .find((p) => p.grpno.toString() === projectId) as ProjectData | undefined;
+      .find((p: any) => p.grpno.toString() === projectId);
   };
 
   const projectData = getProject();
@@ -100,7 +100,9 @@ export default function Project() {
     ? {
         "Group No.": projectData.grpno,
         "Project Title": projectData.title,
-        "Team Members": [projectData.member1, projectData.member2, projectData.member3, projectData.member4].filter(Boolean),
+        "Team Members": [projectData.member1, projectData.member2, projectData.member3, projectData.member4].filter((member): member is string =>
+          Boolean(member),
+        ),
         Guide: projectData.guide,
         "Co-guide": projectData.coguide,
         "Project Description": projectData.description,
@@ -110,7 +112,7 @@ export default function Project() {
         "Project Domain": projectData.domain,
         Year: year || "",
         Photos: [projectData["member1 photo"], projectData["member2 photo"], projectData["member3 photo"], projectData["member4 photo"]].filter(
-          Boolean,
+          (photo): photo is string => Boolean(photo),
         ),
         "Guide Photo": projectData["guide photo"] || "",
         "Co-guide Photo": projectData["coguide photo"] || "",
@@ -136,54 +138,39 @@ export default function Project() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* LEFT */}
           <div className="lg:col-span-2 space-y-8">
-           {/* HEADER */}
-<div className="bg-white rounded-2xl p-8 shadow-lg border">
-  <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-    <div className="flex-1">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
-          Group {projectInfo["Group No."]}
-        </span>
+            {/* HEADER */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border">
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">Group {projectInfo["Group No."]}</span>
 
-        {projectInfo["Year"] && (
-          <span className="bg-slate-100 px-3 py-1 rounded-full">
-            {projectInfo["Year"]}
-          </span>
-        )}
+                    {projectInfo["Year"] && <span className="bg-slate-100 px-3 py-1 rounded-full">{projectInfo["Year"]}</span>}
 
-        <span className="bg-slate-100 px-3 py-1 rounded-lg">
-          {projectInfo["Project Domain"]}
-        </span>
-      </div>
+                    <span className="bg-slate-100 px-3 py-1 rounded-lg">{projectInfo["Project Domain"]}</span>
+                  </div>
 
-      <h1 className="text-3xl font-bold">
-        {projectInfo["Project Title"]}
-      </h1>
+                  <h1 className="text-3xl font-bold">{projectInfo["Project Title"]}</h1>
 
-      {/* SDG Goals */}
-      {projectInfo["SDG Goals"] &&
-        projectInfo["SDG Goals"]!.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4">
-            {projectInfo["SDG Goals"]!.map((goal) => (
-              <span
-                key={goal}
-                className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium"
-              >
-                {goal}
-              </span>
-            ))}
-          </div>
-        )}
-    </div>
-  </div>
+                  {/* SDG Goals */}
+                  {projectInfo["SDG Goals"] && projectInfo["SDG Goals"]!.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {projectInfo["SDG Goals"]!.map((goal) => (
+                        <span key={goal} className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                          {goal}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
 
-  {division && (
-    <p className="text-sm text-slate-600">
-      <strong>Division:</strong> {division}
-    </p>
-  )}
-</div>
-            
+              {division && (
+                <p className="text-sm text-slate-600">
+                  <strong>Division:</strong> {division}
+                </p>
+              )}
+            </div>
 
             {/* DESCRIPTION */}
             <div className="bg-white rounded-2xl p-8 shadow-lg border">
@@ -230,13 +217,13 @@ export default function Project() {
           <div className="lg:col-span-1">
             <div className="sticky top-24">
               <Team
-  guide={projectInfo["Guide"]}
-  coguide={projectInfo["Co-guide"]}
-  members={projectInfo["Team Members"]}
-  guidePhoto={projectInfo["Guide Photo"]}
-  coguidePhoto={projectInfo["Co-guide Photo"]}
-  memberPhotos={projectInfo["Photos"]}
-/>
+                guide={projectInfo["Guide"]}
+                coguide={projectInfo["Co-guide"]}
+                members={projectInfo["Team Members"]}
+                guidePhoto={projectInfo["Guide Photo"]}
+                coguidePhoto={projectInfo["Co-guide Photo"]}
+                memberPhotos={projectInfo["Photos"]}
+              />
             </div>
           </div>
         </div>
