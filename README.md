@@ -1,5 +1,27 @@
 # Project Synapse
 
+
+### 🔐 GitHub Push & Deployment Note (Important)
+
+This project is connected to the GitHub organization repository and deployed via Vercel.
+
+**Important while pushing changes:**
+
+-   Always push changes using the **VESIT-AI-DS organization account**.
+-   Use a **Personal Access Token (PAT)** of the VESIT-AI-DS GitHub account while authenticating.
+-   Do **not** push from your personal GitHub account to a fork and expect deployment.
+
+#### Why?
+
+Vercel production deployment is linked directly to the organization repository:
+
+VESIT-AI-DS/Project_Synapse
+
+If you push from your own fork/personal repository:
+
+-   Vercel will not trigger deployment for the main project.
+-   Adding external collaborators on Vercel may require paid/premium team features.
+
 ## 🚀 Overview
 
 This project dynamically displays student projects across multiple academic years.
